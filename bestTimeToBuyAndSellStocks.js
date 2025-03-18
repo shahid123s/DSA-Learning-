@@ -30,3 +30,45 @@ const maxProfit = (prices) => {
 }
 
 console.log(maxProfit([7,1,5,3,6,4]))
+
+
+
+
+
+
+
+
+
+const mediasoup = require("mediasoup");
+
+let worker;
+let router;
+
+const createMediaSoupWorker = async () => {
+  worker = await mediasoup.createWorker();
+  console.log("✅ MediaSoup Worker Created");
+
+  router = await worker.createRouter({
+    mediaCodecs: [
+      {
+        kind: "audio",
+        mimeType: "audio/opus",
+        clockRate: 48000,
+        channels: 2,
+      },
+      {
+        kind: "video",
+        mimeType: "video/VP8",
+        clockRate: 90000,
+      },
+    ],
+  });
+
+  console.log("✅ MediaSoup Router Created");
+};
+
+module.exports = { createMediaSoupWorker, getWorker: () => worker, getRouter: () => router };
+
+
+
+createMediaSoupWorker

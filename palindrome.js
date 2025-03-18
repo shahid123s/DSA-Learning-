@@ -6,7 +6,7 @@
 // }
     
 
-// to optimise we do
+// to optimise we do   malayalam ==  malayalam 
 
 
 const isPalindrom = (num) => {
