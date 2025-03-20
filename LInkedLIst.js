@@ -270,7 +270,7 @@ class SinglyLinkedList {
 
 
      removeDuplicate(){
-        
+
      }
 
 }
@@ -297,9 +297,179 @@ function converArrToLinkedList (arr) {
     return list;
 }
 
-// const arrLis = converArrToLinkedList([1, 2, 3, 4, 5, ])
+const arrLis = converArrToLinkedList([1, 2, 3, 4, 5, ])
 
-// console.log(arrLis.printListReverse())
+console.log(arrLis.printListReverse())
 
 
+
+
+
+
+
+// var swapPairs = function(head) {
+//     if(!head || !head.next) return head;
+//     let curr = head;
+
+//         let temp = curr.next;
+//         console.log(curr.val, curr.next.val)
+//         curr.next = curr.next.next;
+//         curr.next.next = curr
+
+
+//     return head;
+// };
+
+// const cons = (head, tail) => {
+//     let curr = head
+//     while(curr.next){
+        
+//         console.log(curr.val, curr.next.val);
+//         curr = curr.next;
+//     }
+// }
+
+// function ListNode(val, next = null) {
+//     this.val = val;
+//     this.next = next;
+// }
+
+// // Creating a linked list: 1 -> 2 -> 3 -> 4
+// let head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+
+// // swapPairs(head)
+// cons(head)
+
+
+
+
+
+
+// Creating a doubly linked list
+
+class DoubleNode {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+};
+
+class DoublyLinkedList{
+    constructor(){
+        this.head= null;
+        this.tail = null;
+        this.value = null;
+    }
+    addNode(value){
+        const newNode = new DoubleNode(value);
+        if(!this.head){
+            this.head= newNode;
+            this.tail = newNode
+        }
+        else  {
+            newNode.prev = this.tail;
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+    }
+
+    addFirstNode(value){
+        const newNode = new DoubleNode(value);
+        if(!this.head){
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode
+        }
+    }
+
+    print(){
+        if(!this.head) return ;
+        let curr = this.head;
+        let arr = []
+        while(curr){
+            arr.push(curr.value);
+            curr = curr.next;
+        }
+        return arr
+    }
+
+    traverseBackwart(){
+        let arr = [];
+        let curr = this.tail;
+        while(curr){
+            arr.push(curr.value);   
+            curr = curr.prev;
+        }
+        return arr
+    }
+
+    count(){
+        let size = 0;
+        let curr = this.head;
+        while(curr){
+            size++
+            curr= curr.next;
+        };
+        return size
+    }
+
+
+    // Insert At last if tail is not given 
+    insertLast(value){
+        const newNode = new DoubleNode(value);
+        let curr = this.head;
+        while(curr.next){
+            curr = curr.next;
+        }
+        curr.next = newNode;
+        newNode.prev = curr;
+    }
+    
+
+    // Insert at a specific position 
+    insertAt(value, index){
+        const newNode = new DoubleNode(value);
+        let curr  = this.head;
+        if(index === 0){
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode;
+            return;
+        }
+        let i = 0;
+        while(i < index - 1){
+            curr = curr.next;
+            i++
+        };
+        // console.log(curr, i, index, )
+        curr.next.prev = newNode;
+        newNode.next = curr.next;
+        curr.next = newNode;
+        newNode.prev = curr;
+    }
+}
+
+let dList = new DoublyLinkedList();
+
+dList.addFirstNode(2)
+dList.addNode(6)
+dList.addNode(7)
+dList.addNode(8)
+dList.addNode(9)
+dList.addNode(10)
+dList.addFirstNode(3)
+dList.addFirstNode(1)
+dList.addFirstNode(5)
+dList.insertAt(11,4)
+console.log(dList.print())
+// console.log(dList.traverseBackwart())
+console.log(dList.count())
+
+
+
+// insertion at begining of the Doubly linked list
 
