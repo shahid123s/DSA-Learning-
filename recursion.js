@@ -225,4 +225,38 @@ function removeUnique(arr, freque = freq(arr), index = 0){
 }
 
 
-console.log(removeUnique([1,3,2,3,2,3] ))
+// console.log(removeUnique([1,3,2,3,2,3] ))
+
+
+// Remove first uniqe Element in  array
+function removeFirstUnique(arr, freque = freq(arr), index = 0){
+    if(arr.length === index ) return [];
+    let curr = arr[index];
+    if(freque[curr] === 1) return arr.filter(x => x != curr)
+    return removeFirstUnique(arr, freque, index+1)
+}
+
+console.log(removeFirstUnique([1, 2, 3, 4, 4, 3]))
+
+
+// Delete Linked list using recursion 
+
+function deleteLinkedList (head) {
+    if(!head) return null ;
+    let next = head.next
+    head.next = null;;
+    return deleteLinkedList(next);
+}
+
+
+
+
+// Product of Two Number using recursion 
+
+
+function product(x, y){
+    if(y === 0) return 0;
+    return x +product(x, y-1)
+}
+
+console.log(product(3, 5))
