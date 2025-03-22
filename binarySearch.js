@@ -50,4 +50,4 @@ function countNumberOccurence(arr, x, start = 0, end = arr.length-1) {
     return last - first+ 1;
 }
 
-console.log(countNumberOccurence([1, 2, 3, 4, 5, 5, 5, 6, 6, 7, 8, 8, 9], 9))
+console.log(countNumberOccurence([1, 2, 3, 4, 5, 5, 5, 6, 6, 7, 8, 8, 9], 9));

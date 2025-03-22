@@ -260,3 +260,19 @@ function product(x, y){
 }
 
 console.log(product(3, 5))
+
+
+
+
+
+
+// palindrome 
+
+function isPalindrom (str, start = 0, end = str.length -1){
+    if(start> end) return true;
+    if(str[start] != str[end]) return false;
+    return isPalindrom(str, start+1, end-1)
+}
+
+console.log(isPalindrom('malayilam')) // O(n) O(1)
+
