@@ -209,6 +209,20 @@ class SinglyLinkedList {
         return arr;
     }
 
+    // 1 - 2 - 3 - 4
+
+    reverseList() {
+        let curr = this.head;
+        let temp = null;
+        
+        while(curr) {
+            let temp = curr.next;
+            curr.next  = 
+            curr.next.next = curr;
+
+        }
+    }
+
     addNodeAfterValue(value, node){
         let curr = this.head;
         const newNode = new Node(node)
@@ -472,4 +486,7 @@ console.log(dList.count())
 
 
 // insertion at begining of the Doubly linked list
+
+
+
 
