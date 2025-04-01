@@ -105,6 +105,20 @@ class Stack {
     size(){
         return this.items.length;
     }
+    deleteMiddle(){
+        let mid = Math.floor(this.size()/ 2);
+        return this.deleteMiddleHelper(mid)
+    }
+
+    deleteMiddleHelper(index){
+        if(index === 0){
+           return  this.pop()
+        }
+        let temp = this.pop();
+        this.deleteMiddleHelper(index-1);
+        return this.push(temp);
+    }
+
     print(){
         console.log(this.items);
     }
@@ -182,6 +196,8 @@ class LinkedListStack {
     isEmpty(){
         return this.size === 0;
     }
+
+    
     print(){
         let curr = this.top;
         let stack = [];
@@ -197,3 +213,28 @@ class LinkedListStack {
 let ListStack = new LinkedListStack();
 // ListStack.isEmpty()
 console.log(ListStack.peek()) 
+
+// Reverse the string order by its word 
+// Hello world --> word Hello 
+
+
+function reverWord(str) {
+    let arr = str.split(' ');
+    let stack = []
+    for(let i = 0; i < arr.length; i++){
+        stack.push(arr[i]);
+    }
+    let out = ''
+    while(stack.length){
+        let curr = stack.pop();
+        out = out ? `${out} ${curr}`: curr; 
+    }
+    return out    
+}
+console.log(reverWord('hello world'))
+
+
+
+// Delete the middle element in the stack 
+
+
