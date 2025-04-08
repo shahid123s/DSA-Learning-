@@ -109,18 +109,18 @@ class BinaryTree {
     
 }
 
-const tree = new BinaryTree();
-tree.insert(10)
-tree.insert(20)
-tree.insert(30)
-tree.insert(40)
-tree.insert(50);
-tree.insert(60);
-tree.insert(70);
+// const tree = new BinaryTree();
+// tree.insert(10)
+// tree.insert(20)
+// tree.insert(30)
+// tree.insert(40)
+// tree.insert(50);
+// tree.insert(60);
+// tree.insert(70);
 
-// tree.inOrderTraversal()
-// tree.levelorderTraversal()
-console.log(tree.levelOrderTraversal())
+// // tree.inOrderTraversal()
+// // tree.levelorderTraversal()
+// console.log(tree.levelOrderTraversal())
 
 
 
@@ -234,3 +234,146 @@ function zigzagLevelOrderTraversal(node) {
     }
     return result;
 }
+
+
+class TreeNode{
+    constructor (val){
+        this.val = val;
+        // this.child = [];// normaly 
+        this.left= null;
+        this.right = null;
+    }
+}
+
+class Tree  {
+    constructor (){
+        this.root = null;
+    }
+
+    insert(val){
+        const newNode = new TreeNode(val);
+        if(!this.root) {
+            this.root = newNode;
+            return;
+        }
+        let queue = [this.root];
+        while(queue.length){
+            let curr = queue.shift();
+            if(!curr.left){
+                curr.left =newNode;
+                return
+            } else {
+                queue.push(curr.left);
+            } 
+            if(!curr.right){
+                curr.right = newNode;
+                return 
+            } else {
+                queue.push(curr.right)
+            }
+        }
+    }
+    
+
+    inOrderTraversal(node= this.root){
+        if(!node) return [];
+        return [
+            ...this.inOrderTraversal(node.left),
+            node.val,
+            ...this.inOrderTraversal(node.right),
+        ]
+    }
+
+    heightOfTree(node = this.root){
+        let max = -Infinity;
+
+        function helper(node){
+            if(!node) return 
+
+            helper(node.left)
+            if(max < node.val) max = node.val;
+            helper(node.right)
+        }
+        helper(node, 0);
+        return max;
+    }
+    getRoot(){
+        return this.root;
+    }
+
+    invert(node =this.root){
+        if(!node) return ;
+        let queue = [node];
+        while(queue.length){
+            let curr = queue.shift();
+            [curr.left, curr.right ] = [curr.right, curr.left];
+            if(curr.left) queue.push(curr.left);
+            if(curr.right) queue.push(curr.right)
+        }
+    }
+    bfs(node = this.root){
+        if(!node) return [];
+    let queue = [node];
+    let result = [];
+    while(queue.length){
+        let current = queue.shift();
+        result.push(current.val);
+        if(current.left) queue.push(current.left);
+        if(current.right) queue.push(current.right);
+    }
+    return result;
+    }
+
+
+}
+
+let t = new Tree();
+t.insert(15)
+t.insert(12)
+t.insert(16)
+t.insert(9)
+t.insert(11)
+t.insert(7)
+// console.log(t.inOrderTraversal())
+console.log(t.heightOfTree())
+
+console.log(t.bfs())
+t.invert();
+// console.log(t.inOrderTraversal())
+console.log(t.bfs())
+
+const first = t.getRoot()
+
+let t1 = new Tree();
+t1.insert(15)
+t1.insert(12)
+t1.insert(16)
+t1.insert(9)
+t1.insert(11)
+t1.insert(7)
+const sec = t1.getRoot()
+
+
+
+function checkIsIdentical (t1, t2) {
+    if(!t1 || !t2) return false;
+    let queue1 = [t1];
+    let queue2 = [t2];
+    while(queue1.length && queue2.length){
+        let curr1 = queue1.shift()
+        let curr2 = queue2.shift()
+        if(curr1.val !== curr2.val) return false
+        if(curr1.left && curr2.left){
+        queue1.push(curr1.left);
+        queue2.push(curr2.left);
+        } 
+        if(curr2.right && curr1.right){
+            queue1.push(curr1.right);
+            queue2.push(curr2.right);
+        }
+
+    }
+    return queue1.length === 0 && queue2.length === 0
+}
+
+// console.log(checkIsIdentical(first,sec))
