@@ -224,4 +224,4 @@ function heapify(arr, heapSize, index){
         [arr[index], arr[largest]] = [arr[largest], arr[index]]
         heapify(arr, heapSize, largest);
     }
-}
+} 
